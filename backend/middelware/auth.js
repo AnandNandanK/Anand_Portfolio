@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 export const isAuthenticated=async(req,res,next)=>{
     try {
 
-        const token = req.cookies.token;
+        const token = req.cookies.token ||  req.header("Authorization")?.replace("Bearer ", "") ; 
         // console.log("PRINTING TOKEN...",token);
 
         if (!token) {
@@ -14,7 +14,7 @@ export const isAuthenticated=async(req,res,next)=>{
         }
 
         //verifying token is matching or not
-        const decodeToken=await jwt.verify(token,process.env.SECRET_KEY);
+        const decodeToken= jwt.verify(token,process.env.SECRET_KEY);
 
         if (!decodeToken) {
             return res.status(400).json({

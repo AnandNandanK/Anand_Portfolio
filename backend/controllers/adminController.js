@@ -102,6 +102,15 @@ export const loginAdmin = async (req, res) => {
     try {
         const { email, password } = req.body;
 
+        console.log('PRINTING EMAIL AND PASSWORD.......',email,password)
+
+        if (!email || !password) {
+            return res.status(400).json({
+                message: "Enter Email and Password first",
+                success: false,
+            });
+        }
+
         // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -137,15 +146,16 @@ export const loginAdmin = async (req, res) => {
             });
         }
 
-
+         // Save token to user document in database
+  
         // Create a user object without the password
-        const withoutPassUser = {
-            _id: user._id,
-            name:user.name,
-            email: user.email,
-        };
+        // const withoutPassUser = {
+        //     _id: user._id,
+        //     name:user.name,
+        //     email: user.email,
+        // };
 
-        console.log("WITHOUT PASS USER....", withoutPassUser)
+        // console.log("WITHOUT PASS USER....", withoutPassUser)
 
         // Create a payload for JWT
         let payload = {
@@ -159,6 +169,11 @@ export const loginAdmin = async (req, res) => {
         });
 
 
+
+        user.token = token
+        user.password = undefined
+
+        
         // Set cookie and return success response
         return res
             .status(200)
@@ -166,7 +181,8 @@ export const loginAdmin = async (req, res) => {
             .json({
                 message: "User logged in successfully",
                 success: true,
-                withoutPassUser,
+                user,
+                token
             });
 
     } catch (error) {

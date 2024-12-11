@@ -17,7 +17,12 @@ export const createProject = async (req, res) => {
         const userId = req.id;
 
         const { title, description, gitLink, vercelLink } = req.body;
+        console.log(title, description, gitLink, vercelLink) 
+        // console.log(title, description, gitLink, vercelLink) 
+        console.log(req.body)
         const localfilepath = req.file?.path;
+
+        console.log("localFilePath",localfilepath)
 
 
         if (!title || !description || !localfilepath || !gitLink) {
@@ -45,6 +50,7 @@ export const createProject = async (req, res) => {
 
         await project.save();
 
+
         const user = await User.findByIdAndUpdate(userId,
             {
                 $push: { project: project.id } // Add the new project to the project array
@@ -68,6 +74,59 @@ export const createProject = async (req, res) => {
 
 
 // ********************************************************************************************************
+//                                      GET PROJECT
+// ********************************************************************************************************
+
+export const getProject = async (req, res) => {
+    try {
+
+        const userId = req.id;
+
+        const user = await User.findById(userId).populate('project');
+
+        // console.log(project)
+
+
+        return res.status(200).json({
+            message: "Project Fetched Successfully",
+            success: true,
+            data: user.project
+        });
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+// ********************************************************************************************************
+//                                     GET Project BY ID
+// ********************************************************************************************************
+
+export const getProjectById = async (req, res) => {
+    try {     
+        
+        const params = req.params.id;
+
+        const projectById = await Project.findById(params);
+
+        // console.log(projectPhoto.url)
+
+
+        return res.status(200).json({
+            message: "Project By ID Fetched Successfully",
+            success: true,
+            data: projectById
+        });
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+// ********************************************************************************************************
 //                                      Update Project
 // ********************************************************************************************************
 
@@ -75,13 +134,10 @@ export const updateProject = async (req, res) => {
     try {
 
         const { title, description, gitLink, vercelLink } = req.body;
-
         const userId = req.id;
-
         const localfilepath = req.file?.path;
         const projectPhoto = await uploadOnCloudinary(localfilepath);
         const params = req.params.id;
-
         const updateProject = await Project.findById(params);
 
         // console.log(projectPhoto.url)
@@ -110,7 +166,8 @@ export const updateProject = async (req, res) => {
 
 export const deleteProject = async (req, res) => {
     try {
-        const projectId = req.params.id; // Assuming the project ID is passed in the request params
+        const {projectId} = req.body; // Assuming the project ID is passed in the request params
+        console.log("PROJECT ID",projectId)
         const userId = req.id; // Assuming the user ID is retrieved from auth middleware
 
         if (!projectId) {

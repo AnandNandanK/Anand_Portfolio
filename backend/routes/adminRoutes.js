@@ -11,7 +11,7 @@ const router=express.Router();
 
 //ADMIN SECTION
 router.post("/register",createAdmin);
-router.get("/login",loginAdmin);
+router.post("/login",loginAdmin);
 router.put("/update",isAuthenticated,upload.single("resume"),updateAdmin);
 router.post("/contactme",isAuthenticated,contactAdmin);
 

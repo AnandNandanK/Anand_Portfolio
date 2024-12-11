@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer"
 
-export const mailSender = async (userEmail, title, body) => {
+export const mailSender = async (userEmail, name, body) => {
   try {
     // Step 1: Create transporter
     let transporter = nodemailer.createTransport({
@@ -24,7 +24,7 @@ export const mailSender = async (userEmail, title, body) => {
     let adminMail = await transporter.sendMail({
       from: `"Portfolio | Contact" <${process.env.MAIL_USER}>`, // sender address
       to: `your-email@example.com`, // your email address (admin)
-      subject: `${title}`, // subject with user's message
+      subject: `${name}`, // subject with user's message
       html: `<p>You have received a new message from ${userEmail}:</p><p>${body}</p>`, // email body with form content
     });
 

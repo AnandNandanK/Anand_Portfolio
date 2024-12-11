@@ -3,10 +3,10 @@ import {mailSender} from "../utils/mailSender.js"
 export const contactAdmin = async (req, res) => {
     try {
 
-        const { email, message, title} = req.body;
-        console.log(email, message, title,)
+        const { email, message, name} = req.body;
+        console.log(email, message, name,)
 
-        if (!email || !message || !title) {
+        if (!email || !message || !name) {
             return res.status(400).json({
                 message: "All feilds are required",
                 success: false
@@ -14,8 +14,8 @@ export const contactAdmin = async (req, res) => {
         }
 
         try {
-            const emailResponse = mailSender(email, title, message);
-            console.log("Email sent successfully:", emailResponse.response)
+            const emailResponse = mailSender(email, name, message);
+            console.log("Email sent successfully:", emailResponse.response);
 
         } catch (error) {
             console.log(error)

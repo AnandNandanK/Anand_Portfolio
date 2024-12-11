@@ -7,12 +7,20 @@ import adminRoute from "./routes/adminRoutes.js"
 import cookieParser from "cookie-parser"
 import heroRoute from "./routes/heroRoutes.js"
 import projectRoute from "./routes/projectRoute.js"
-
+import cors from "cors"
 
 const app = express();
 app.use(express.json()); // for parsing frontend json string data 
 app.use(cookieParser());// using cookiParser middelware
 
+
+const corsOptions = {
+    origin: "http://localhost:5173", 
+    credentials: true,
+  };
+  
+  
+app.use(cors(corsOptions));
 
 // Default route
 app.get("/", (req, res) => {
