@@ -9,12 +9,12 @@ export const getHeroSection = async (req, res) => {
     try {
 
         const userId = req.id;
-        console.log("USER ID....",userId)
+        console.log("USER ID....",req)
 
         const adminDetails= await User.findById(userId);
-        console.log('ADMIN DETAILS.....',adminDetails.hero);
+        console.log('ADMIN DETAILS.....',adminDetails);
 
-        const hero = await Hero.findById(adminDetails.hero);
+        const hero = await Hero.findById(adminDetails?.hero);
         console.log('HERO ID......',hero);
 
         if (!hero) {

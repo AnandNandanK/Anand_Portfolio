@@ -13,7 +13,7 @@ const UpdateProject = () => {
 
     return (
 
-        <div className='max-w-[1100px] flex items-center justify-center mx-auto overflow-y-hidden px-3'>
+        <div className=' flex items-center justify-center mx-auto overflow-y-hidden px-3 bg-white'>
             <Dashboard/>
             <CreateProjects/> 
         </div>

@@ -1,37 +1,49 @@
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
-export const isAuthenticated=async(req,res,next)=>{
+dotenv.config()
+
+export const isAuthenticated = async (req, res, next) => {
     try {
+		// Extracting JWT from request cookies, body or header
+		const token =
+			req.cookies.token ||
+			req.body.token ||
+			req.header("Authorization").replace("Bearer ", "");
 
-        const token = req.cookies.token ||  req.header("Authorization")?.replace("Bearer ", "") ; 
-        // console.log("PRINTING TOKEN...",token);
+		// If JWT is missing, return 401 Unauthorized response
 
-        if (!token) {
-            return res.status(400).json({
-                message:"user is not authenticated",
-                success:false
-            })
-        }
+		// console.log(token)
 
-        //verifying token is matching or not
-        const decodeToken= jwt.verify(token,process.env.SECRET_KEY);
+		// console.log("SECRET KEY .....",process.env.SECRET_KEY)
 
-        if (!decodeToken) {
-            return res.status(400).json({
-                message:"invalid Token",
-                success:false
-            })
-        }
+		if (!token) {
+			return res.status(401).json({ success: false, message: `Token Missing` });
+		}
 
-        // console.log("PRINTING DECODE TOKEN......", decodeToken)
+		try {
+			// Verifying the JWT using the secret key stored in environment variables
+			const decode = jwt.verify(token, process.env.SECRET_KEY);
+			// console.log("printing Decode...",decode);
+			// Storing the decoded JWT payload in the request object for further use
+			console.log("DECODE....",decode)
+			req.id=decode.id;
+			// req.body=course; 
+		} catch (error) {
+			// If JWT verification fails, return 401 Unauthorized response
+			return res.status(401).json({ 
+				success: false, 
+				message: "token is invalid in auth " 
+			});
+		}
 
-        //storing user id in reqest so that we can access logged in user globally
-        req.id=decodeToken.id;
-
-        //calling next() function for calling next api in route 
-        next();
-        
-    } catch (error) {
-        console.log(error)
-    }
+		// If JWT is valid, move on to the next middleware or request handler
+		next();
+	} catch (error) {
+		// If there is an error during the authentication process, return 401 Unauthorized response
+		return res.status(401).json({
+			success: false,
+			message: `Something Went Wrong While Validating the Token`,
+		});
+	}
 }

@@ -11,7 +11,7 @@ const router=express.Router();
 router.get("/get",isAuthenticated,getProject);
 router.post("/create",isAuthenticated,upload.single("file"),createProject);
 router.get("/get/:id",isAuthenticated,getProjectById);
-router.put("/update/:id",isAuthenticated,upload.single("projectPhoto"),updateProject);
+router.put("/update/:id",isAuthenticated,upload.single("file"),updateProject);
 router.post("/delete",isAuthenticated,deleteProject);
 
 

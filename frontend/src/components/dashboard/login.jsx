@@ -12,7 +12,7 @@ export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { loading, user } = useSelector((state) => state.auth);
+    const { token,user } = useSelector((state) => state.auth);
 
     console.log('USER IN LOGIN PAGE',user)
 
@@ -34,15 +34,15 @@ export default function Login() {
 
 
     useEffect(() => {
-        if (user) {
+        if (token) {
             navigate("/dashboard")
         };
-    }, []);
+    }, [token]);
 
 
 
     return (
-        <div>
+        <div className='h-screen w-screen bg-white'>
             <div className='max-w-[1100px] flex items-center justify-center mx-auto overflow-y-hidden px-3'>
                 <form onSubmit={handleOnSubmit} className='w-[90%] lg:w-1/2 md:w-1/2 border border-gray-200 rounded-md p-4 my-10 bg-white bg-opacity-80'>
                     <h1 className='font-bold text-xl mb-5 w-full text-center'>Admin Login</h1>
@@ -79,8 +79,8 @@ export default function Login() {
                         </Button>
                     ) : (
                         <Button type="submit" className="w-full my-4">Login</Button>
-                    )}
-                  */}
+                    )} */}
+                 
 
                     <Button type="submit" className="w-full my-4">Login</Button>
 

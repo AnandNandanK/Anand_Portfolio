@@ -269,16 +269,48 @@ export const updateAdmin = async (req, res) => {
 };
 
 
+// VERIFY TOKEN
+export const verifyToken = async (req, res) => {
+    try {
+        // Extracting token from Authorization header
+        console.log(req.header)
+        const token = req.header("Authorization")?.replace("Bearer ", "");
 
+        console.log(token, "PRINTING TOKEN.....");
 
+        // If no token is provided in the header, return 401 Unauthorized
+        if (!token) {
+            return res.status(401).json({
+                success: false,
+                message: "Token is Null"
+            });
+        }
 
+        
 
+        try {
+            // Verify the token using JWT_SECRET
+            const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-
-
-
-
-
+            // If token is valid, you can add any logic or send response
+            return res.status(200).json({
+                success: true,
+                message: "Token is valid",
+                user: decoded // Send the decoded user info if needed
+            });
+        } catch (error) {
+            // If the token verification fails (expired, invalid, etc.)
+            return res.status(401).json({
+                success: false,
+                message: "Token is invalid in verify token"
+            });
+        }
+    } catch (error) {
+        // If there's a server error
+        console.error("Error in verifying token:", error);
+        return res.status(500).json({ success: false, message: "Server error" });
+    }
+};
 
 
 
@@ -311,8 +343,6 @@ export const updateAdmin = async (req, res) => {
 //         return res.status(500).json({ message: "Server error", success: false });
 //     }
 // };
-
-
 
 
 // // Delete specific user by email

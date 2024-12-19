@@ -69,7 +69,7 @@ const EditProject = () => {
     };
 
     return (
-        <div className='max-w-[1200px] bg-white mx-auto flex justify-center items-center'>
+        <div className='h-full w-screen bg-white mx-auto flex justify-center items-center'>
             <Dashboard/>
             <form onSubmit={handleOnSubmit} className='w-[90%] lg:w-1/2 md:w-1/2 border shadow-lg border-gray-200 rounded-md p-4 my-10 bg-white bg-opacity-80'>
                 <h1 className='font-bold text-xl mb-5 w-full text-center'>Edit Project </h1>
@@ -157,7 +157,7 @@ const EditProject = () => {
                     />
                 </div>
 
-                <Button type="submit" className="w-full my-4">Create Project</Button>
+                <Button type="submit" className="w-full my-4">Update Project</Button>
             </form>
 
 

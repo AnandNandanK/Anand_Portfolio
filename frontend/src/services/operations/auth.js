@@ -52,11 +52,11 @@ export function login(email, password, navigate) {
 
             toast.success("Login Successful")
 
-            dispatch(setToken(response.data.token))
+            dispatch(setToken(response?.data?.token))
 
-            localStorage.setItem("token", JSON.stringify(response.data.token))
+            // localStorage.setItem("token", JSON.stringify(response.data.token))
 
-            dispatch(setUser(response.data.user))
+            dispatch(setUser(response?.data?.user))
             
             navigate("/dashboard/herosection")
 
@@ -86,7 +86,7 @@ export function updateProfile(title,myself,token) {
 
         )
             
-            console.log(response,"PRINTING RESPONSE ")
+            console.log(response.data.data,"PRINTING RESPONSE....... ")
 
             console.log("LOGIN API RESPONSE............", response)
 
@@ -96,14 +96,19 @@ export function updateProfile(title,myself,token) {
 
             toast.success("Updated Successfull")
 
+            console.log("SHowing DATA.....",response.data.data)
 
-            dispatch(setProfile(response.data.hero.data))
+
+            dispatch(setProfile(response.data.data))
             
             // navigate("/dashboard/herosection")
+
+            dispatch(setLoading(false))
 
         } catch (error) {
             console.log("LOGIN API ERROR............", error)
             toast.error(error.response?.data?.message)
+            dispatch(setLoading(false))
         }
         dispatch(setLoading(false))
     }
@@ -157,6 +162,8 @@ export function createProject(formData, token,projects, navigate) {
 }
 
 
+
+
 export function updateProject(formData, token , paramsId , navigate) {
     return async (dispatch) => {
 
@@ -180,7 +187,7 @@ export function updateProject(formData, token , paramsId , navigate) {
                 
             );
 
-            console.log(response.data, "API Response");
+            console.log(response, "API Response.......");
 
             if (!response.data.success) {
                 throw new Error(response.data.message);
@@ -292,6 +299,7 @@ export function logout(navigate) {
         console.log("clicked on Logout")
       dispatch(setToken(null))
       dispatch(setUser(null))
+      dispatch(setProjects(null))
       localStorage.removeItem("token")
       localStorage.removeItem("user")
       toast.success("Logged Out")

@@ -3,6 +3,7 @@ const BASE_URL="http://localhost:4000/api/v1/"
 
 export const endpoint={
     LOGIN_API:BASE_URL+ "admin/login",
+    VERYFY_TOKEN_API:BASE_URL+ "admin/verify",
 }
 
 export const heroendpoint={
