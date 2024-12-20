@@ -8,7 +8,7 @@ import { upload } from "../middelware/multer.js";
 const router=express.Router();
 
 //HERO SECTION
-router.get("/get",isAuthenticated,getHeroSection);
+router.get("/get",getHeroSection);
 router.put("/update",isAuthenticated,upload.single("avatar"),updateHeroSection);
 
 

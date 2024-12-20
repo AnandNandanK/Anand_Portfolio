@@ -8,7 +8,7 @@ import { createProject, deleteProject, getProject, getProjectById, updateProject
 const router=express.Router();
 
 //HERO SECTION
-router.get("/get",isAuthenticated,getProject);
+router.get("/get",getProject);
 router.post("/create",isAuthenticated,upload.single("file"),createProject);
 router.get("/get/:id",isAuthenticated,getProjectById);
 router.put("/update/:id",isAuthenticated,upload.single("file"),updateProject);
