@@ -29,7 +29,7 @@ app.use(cookieParser());// using cookiParser middelware
 
 
 const corsOptions = {
-    origin: "http://localhost:5173", 
+    origin: process.env.SERVER_URL, 
     credentials: true,
   };
   
