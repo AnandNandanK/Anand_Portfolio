@@ -79,24 +79,29 @@ export const createProject = async (req, res) => {
 
 export const getProject = async (req, res) => {
     try {
+        const projects = await Project.find(); // This returns an array of all projects
 
-        const userId = req.id;
-
-        const user = await User.findById(userId).populate('project');
-
-        // console.log(project)
-
+        if (projects.length === 0) {
+            return res.status(404).json({
+                message: "No projects found",
+                success: false,
+            });
+        }
 
         return res.status(200).json({
-            message: "Project Fetched Successfully",
+            message: "Projects Fetched Successfully",
             success: true,
-            data: user.project
+            data: projects,  // This will be an array of projects
         });
-
     } catch (error) {
-        console.log(error)
+        console.error("Error fetching projects:", error);
+        return res.status(500).json({
+            message: "Internal Server Error",
+            success: false,
+            error: error.message,
+        });
     }
-}
+};
 
 
 

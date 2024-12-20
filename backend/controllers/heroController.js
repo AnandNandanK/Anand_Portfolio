@@ -1,43 +1,39 @@
-import User from "../models/adminModel.js";
 import Hero from "../models/heroSectionModel.js";
-import uploadOnCloudinary from "../config/cloudinary.js";
-
-
 
 export const getHeroSection = async (req, res) => {
-
     try {
+        // Fetch the hero section data from the database
+        const hero = await Hero.find();
+        
+        // Log the fetched data (you can remove this in production)
+        console.log('Hero Section Data:', hero);
 
-        const userId = req.id;
-        console.log("USER ID....",req)
-
-        const adminDetails= await User.findById(userId);
-        console.log('ADMIN DETAILS.....',adminDetails);
-
-        const hero = await Hero.findById(adminDetails?.hero);
-        console.log('HERO ID......',hero);
-
-        if (!hero) {
+        // Check if hero section data is empty
+        if (hero.length === 0) {
             return res.status(404).json({
-                message: "Hero Not FOund",
-                success: false,             
+                message: "Hero Not Found",
+                success: false,
             });
         }
 
+        const heroObject = hero[0];
+        // Successfully return the hero section data
         return res.status(200).json({
             message: "Hero Section Fetched Successfully",
             success: true,
-            data:hero
-            
+            data: heroObject,
         });
 
-
     } catch (error) {
-        console.log(error);
+        // Log and send error response
+        console.error('Error fetching hero section:', error);
+        return res.status(500).json({
+            message: "Internal Server Error",
+            success: false,
+            error: error.message,
+        });
     }
-
-}
-
+};
 
 
 
