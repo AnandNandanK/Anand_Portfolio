@@ -58,7 +58,7 @@ const Projects = () => {
 
 
   const { projects } = useSelector((state) => state.application);
-  console.log("PRINTING PROJECTS TO USE IT", projects.data);
+  console.log("PRINTING PROJECTS TO USE IT", projects?.data);
   const { theam } = useSelector((store) => store.application);
 
   return (
