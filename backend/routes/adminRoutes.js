@@ -13,7 +13,7 @@ const router=express.Router();
 router.post("/register",createAdmin);
 router.post("/login",loginAdmin);
 router.put("/update",isAuthenticated,upload.single("resume"),updateAdmin);
-router.post("/contactme",isAuthenticated,contactAdmin);
+router.post("/contactme",contactAdmin);
 router.get("/verify",isAuthenticated,verifyToken);
 
 

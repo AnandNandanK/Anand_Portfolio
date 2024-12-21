@@ -54,8 +54,8 @@ import {
                             <p className={`${theam?"text-white transition-all duration-300":"text-black transition-all duration-300"} text-lg font-serif`}>
                                {profile?.myself}
                             </p>
-                            <button className="bg-[#8133ef] font-serif text-white p-2 px-4 w-fit border-[1.5px] border-white mt-3">
-                                Know More
+                            <button className="bg-[#8133ef] rounded-sm font-serif text-white p-2 px-4 w-fit border-[1.5px] border-white mt-3">
+                              <a className='w-full' href='/anandresume.pdf' target='blank'> Download Resume</a>
                             </button>
                         </div>
                     </div>
