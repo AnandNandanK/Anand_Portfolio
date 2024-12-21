@@ -75,8 +75,8 @@ function App() {
     <div
       className={`${
         theam
-          ? "transition-all duration-300 bg-[url('./hd.jpg')]"
-          : "transition-all duration-300 bg-[url('./w3.jpg')]"
+          ? "transition-all duration-300 bg-[url('/hd.jpg')]"
+          : "transition-all duration-300 bg-[url('/w3.jpg')]"
       } bg-cover bg-center h-screen bg-fixed overflow-x-hidden`}
     >
       <RouterProvider router={appRouter} />
