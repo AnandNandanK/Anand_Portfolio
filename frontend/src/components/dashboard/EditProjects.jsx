@@ -19,12 +19,12 @@ const EditProjects = () => {
     const { theam } = useSelector((store) => store.application);
 
 
-    console.log("PRINTING PROJECT.....", projects)
+    // console.log("PRINTING PROJECT.....", projects)
     const { token } = useSelector(store => store.auth)
 
     const handleDelete = (id) => {
 
-        console.log(id, token)
+        // console.log(id, token)
         dispatch(deleteProject(id, token));
     }
 

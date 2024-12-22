@@ -31,7 +31,7 @@ const {
 export function login(email, password, navigate) {
     return async (dispatch) => {
 
-        console.log(email,password,"INSIDE THE LOGIN API.....") //DATA AA RHA HAI 
+        // console.log(email,password,"INSIDE THE LOGIN API.....") //DATA AA RHA HAI 
 
         dispatch(setLoading(true))
 
@@ -42,9 +42,9 @@ export function login(email, password, navigate) {
                 password,
             })
             
-            console.log(response,"PRINTING RESPONSE ")
+            // console.log(response,"PRINTING RESPONSE ")
 
-            console.log("LOGIN API RESPONSE............", response)
+            // console.log("LOGIN API RESPONSE............", response)
 
             if (!response.data.success) {
                 throw new Error(response.data.message)
@@ -73,7 +73,7 @@ export function login(email, password, navigate) {
 export function updateProfile(title,myself,token) {
     return async (dispatch) => {
 
-        console.log(title,myself,"INSIDE THE update profile API.....") //DATA AA RHA HAI 
+        // console.log(title,myself,"INSIDE THE update profile API.....") //DATA AA RHA HAI 
 
         dispatch(setLoading(true))
 
@@ -86,9 +86,9 @@ export function updateProfile(title,myself,token) {
 
         )
             
-            console.log(response.data.data,"PRINTING RESPONSE....... ")
+            // console.log(response.data.data,"PRINTING RESPONSE....... ")
 
-            console.log("LOGIN API RESPONSE............", response)
+            // console.log("LOGIN API RESPONSE............", response)
 
             if (!response.data.success) {
                 throw new Error(response.data.message)
@@ -96,7 +96,7 @@ export function updateProfile(title,myself,token) {
 
             toast.success("Updated Successfull")
 
-            console.log("SHowing DATA.....",response.data.data)
+            // console.log("SHowing DATA.....",response.data.data)
 
 
             dispatch(setProfile(response.data.data))
@@ -118,7 +118,7 @@ export function updateProfile(title,myself,token) {
 
 export function createProject(formData, token,projects, navigate) {
     return async (dispatch) => {
-        console.log([...formData.entries()], "FormData being sent");
+        // console.log([...formData.entries()], "FormData being sent");
 
         dispatch(setLoading(true));
 
@@ -133,7 +133,7 @@ export function createProject(formData, token,projects, navigate) {
                 }
             );
 
-            console.log(response.data, "API Response");
+            // console.log(response.data, "API Response");
 
             if (!response.data.success) {
                 throw new Error(response.data.message);
@@ -143,7 +143,7 @@ export function createProject(formData, token,projects, navigate) {
 
              // Get the current state of projects
 
-             console.log(projects)
+            //  console.log(projects)
 
              // Append the new project to the existing list
              const updatedProjects = [...projects, response.data.data];
@@ -169,9 +169,9 @@ export function createProject(formData, token,projects, navigate) {
 export function updateProject(formData, token , paramsId , navigate) {
     return async (dispatch) => {
 
-        console.log(paramsId)
+        // console.log(paramsId)
 
-        console.log([...formData.entries()], "FormData being sent");
+        // console.log([...formData.entries()], "FormData being sent");
         dispatch(setLoading(true));
 
         const url = `${UPDATE_PROJECT_API}/${paramsId}`;
@@ -189,7 +189,7 @@ export function updateProject(formData, token , paramsId , navigate) {
                 
             );
 
-            console.log(response, "API Response.......");
+            // console.log(response, "API Response.......");
 
             if (!response.data.success) {
                 throw new Error(response.data.message);
@@ -234,7 +234,7 @@ export function deleteProject(projectId, token,) {
                 }
             );
 
-            console.log(response.data, "API Response");
+            // console.log(response.data, "API Response");
 
             if (!response.data.success) {
                 throw new Error(response.data.message);
@@ -244,7 +244,7 @@ export function deleteProject(projectId, token,) {
 
              // Get the current state of projects
 
-             console.log(response)
+            //  console.log(response)
 
              // Append the new project to the existing list
              
@@ -277,7 +277,7 @@ export function contactAdmin(name,email,message,token) {
                 }
             );
 
-            console.log(response.data, "API Response");
+            // console.log(response.data, "API Response");
 
             if (!response.data.success) {
                 throw new Error(response.data.message);
@@ -300,7 +300,7 @@ export function contactAdmin(name,email,message,token) {
 
 export function logout(navigate) {
     return (dispatch) => {
-        console.log("clicked on Logout")
+        // console.log("clicked on Logout")
       dispatch(setToken(null))
       dispatch(setUser(null))
       dispatch(setProjects(null))

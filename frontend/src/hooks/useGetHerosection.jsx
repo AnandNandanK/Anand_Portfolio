@@ -31,7 +31,7 @@ export default function UseGetHerosection() {
         const getHeroSection= async()=>{
             try {
                 dispatch(setLoading(false))
-                console.log('INSIDE TRY CATCH IN HERO-HOOK')
+                // console.log('INSIDE TRY CATCH IN HERO-HOOK')
                 const res=await axios.get(GET_HERO_API,{
                     withCredentials:true,
                     headers: {
@@ -40,14 +40,14 @@ export default function UseGetHerosection() {
                 }
             );
 
-            console.log('HERO SECTION HOOK DATA....',res.data.data)
+            // console.log('HERO SECTION HOOK DATA....',res.data.data)
 
                 if(res.data.success){
                     dispatch(setProfile(res.data.data))
                    
                 }
                 
-                console.log('HERO FETCHED SUCCESS',res);
+                // console.log('HERO FETCHED SUCCESS',res);
                 
             } catch (error) {
 

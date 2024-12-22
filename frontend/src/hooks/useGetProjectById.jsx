@@ -24,7 +24,7 @@ const UseGetProjectById = (projectId,navigate) => {
 
 
                 if (res.data.success) {
-                    console.log('PROJECT BY ID FETCHED SUCCESS', res.data.data);
+                    // console.log('PROJECT BY ID FETCHED SUCCESS', res.data.data);
                     dispatch(setSingleProject(res.data.data));
                 }
 

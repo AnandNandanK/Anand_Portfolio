@@ -22,12 +22,12 @@ const ProfileUpdate = () => {
     const nevigate=useNavigate();
 
     const {token,loading} = useSelector((state)=>state.auth)
-    console.log('LOADING : ', loading)
+    // console.log('LOADING : ', loading)
    
 
     const {profile} = useSelector(store => store.application)
 
-    console.log(profile)
+    // console.log(profile)
 
     //FORM START DATA
         const [inputFeild, setInputFeild] = useState({

@@ -146,7 +146,7 @@ export default function Navbar({ onNavigate }) {
 
           {/* Theme Toggle */}
           <div className="p-1 rounded-md w-4">
-            {theam ? (
+            {!theam ? (
               <FaMoon
                 className="text-white hover:text-orange-600 duration-200 ease-in-out size-5"
                 onClick={handleThemeToggle}

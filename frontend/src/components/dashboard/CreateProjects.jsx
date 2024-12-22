@@ -47,7 +47,7 @@ const CreateProjects = () => {
 
     const {projects}=useSelector((state)=>state.application)
 
-    console.log(projects?.data)
+    // console.log(projects?.data)
 
     // Handle form submission
     const handleOnSubmit = (e) => {
@@ -64,7 +64,7 @@ const CreateProjects = () => {
             formData.append("file", inputFeild.file);
         }
 
-        console.log([...formData.entries()]); // Debugging: Logs all form data key-value pairs
+        // console.log([...formData.entries()]); // Debugging: Logs all form data key-value pairs
         dispatch(createProject(formData, token , projects.data, navigate));
     };
 

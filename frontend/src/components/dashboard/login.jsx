@@ -14,7 +14,7 @@ export default function Login() {
 
     const { token,user } = useSelector((state) => state.auth);
 
-    console.log('USER IN LOGIN PAGE',user)
+    // console.log('USER IN LOGIN PAGE',user)
 
     const [inputFeild, setInputFeild] = useState({
         email: "",

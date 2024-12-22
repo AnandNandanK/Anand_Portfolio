@@ -28,7 +28,7 @@ import {
     
     const {theam} =useSelector((store)=>store.application)
     const {profile} = useSelector(store => store.application)
-    console.log(profile,"HERO SECTION DATA.....")
+    // console.log(profile,"HERO SECTION DATA.....")
     
 
     return (

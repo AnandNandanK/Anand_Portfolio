@@ -26,7 +26,7 @@ export default function UseGetAllProjects() {
     useEffect(()=>{
         const getAllProjects= async()=>{
             try {
-                console.log('INSIDE TRY CATCH IN HERO-HOOK')
+                // console.log('INSIDE TRY CATCH IN HERO-HOOK')
                 const res=await axios.get(GET_PROJECT_API,{
                     withCredentials:true,
                     headers: {
@@ -39,7 +39,7 @@ export default function UseGetAllProjects() {
                     dispatch(setProjects(res.data))
                 }
                 
-                console.log('HERO FETCHED SUCCESS',res.data.data);
+                // console.log('HERO FETCHED SUCCESS',res.data.data);
                 
             } catch (error) {
                 console.log(error)
