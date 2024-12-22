@@ -7,7 +7,7 @@ import { setSingleProject } from '../redux/slice/applicationSlice';
 
 const {GET_PROJECT_BY_ID_API} = projectEndpoint;
 
-const UseGetProjectById = (projectId) => {
+const UseGetProjectById = (projectId,navigate) => {
 
     const dispatch = useDispatch()
     const { token } = useSelector(store => store.auth)
@@ -33,7 +33,7 @@ const UseGetProjectById = (projectId) => {
             }
         }
         fetchProject();
-    }, [projectId, dispatch])
+    }, [projectId, dispatch,navigate])
 
 }
 
