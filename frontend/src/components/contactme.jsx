@@ -47,6 +47,14 @@ const Contactme = () => {
         e.preventDefault();
         console.log(name, email, message, token)
         dispatch(contactAdmin(name, email, message, token));
+
+         // Reset input fields
+         setInputFeild({
+            name: "",
+            email: "",
+            message: ""
+        });
+
     };
 
 
@@ -97,7 +105,7 @@ const Contactme = () => {
                             ></textarea>
                         </div>
 
-                        <Button type="submit" className=" py-3 text-xl px-9 ">Contact me</Button>
+                        <Button type="submit" className=" py-5 border border-white px-9 text-lg">Contact me</Button>
                     </form>
 
 
