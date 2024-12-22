@@ -140,19 +140,20 @@ export const updateProject = async (req, res) => {
 
         const { title, description, gitLink, vercelLink } = req.body;
         const userId = req.id;
-        const localfilepath = req.file?.path;
+        const localfilepath = req?.file?.path;
+        // console.log("Local File Path......",localfilepath)
         const projectPhoto = await uploadOnCloudinary(localfilepath);
         const params = req.params.id;
         const updateProject = await Project.findById(params);
         
 
-        console.log(projectPhoto.url)
+        // console.log("PROJECT PHOTO.....",projectPhoto)
 
         if (title) updateProject.title = title
         if (description) updateProject.description = description
         if (gitLink) updateProject.gitLink = gitLink
         if (vercelLink) updateProject.vercelLink = vercelLink
-        if (projectPhoto.url) updateProject.projectPhoto=projectPhoto.url
+        if (projectPhoto?.url) updateProject.projectPhoto=projectPhoto.url
 
         await updateProject.save();
 

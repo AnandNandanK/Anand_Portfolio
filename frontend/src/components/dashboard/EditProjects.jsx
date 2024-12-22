@@ -39,14 +39,14 @@ const EditProjects = () => {
 
 
     return (
-        <div className='max-w-[1200px] bg-white mx-auto '>
+        <div className='w-screen bg-white mx-auto '>
             <Dashboard />
 
             <h1 className='text-3xl font-bold text-center'>Edit Projects</h1>
 
-            <div className='flex justify-center items-center mt-20'>
+            <div className='flex justify-center items-center mt-20 flex-wrap max-w-[1200px] mx-auto'>
 
-                <div className='grid grid-cols-4 gap-5'>
+                <div className='grid lg:grid-cols-4 gap-5 sm'>
 
                     {
                         projects?.data?.map((project, index) => {

@@ -7,15 +7,16 @@ import { useSelector } from "react-redux"
 import { useDispatch } from 'react-redux';
 import Dashboard from './dashboard';
 import { useParams } from 'react-router-dom';
-import {updateProject} from '../../services/operations/auth.js';
+import { updateProject } from '../../services/operations/auth.js';
 import UseGetProjectById from '../../hooks/useGetProjectById';
 import { FaEdit } from 'react-icons/fa';
+import { Loader2 } from 'lucide-react';
 
 const EditProject = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const params=useParams()
-    const paramsId=params.id;
+    const params = useParams()
+    const paramsId = params.id;
     // console.log("Printing ID",params.id)
 
     UseGetProjectById(params.id);
@@ -25,16 +26,16 @@ const EditProject = () => {
 
     // State for form data
     const [inputFeild, setInputFeild] = useState({
-        title:singleProject?.title || "",
-        gitLink: singleProject?.gitLink ||"",
+        title: singleProject?.title || "",
+        gitLink: singleProject?.gitLink || "",
         vercelLink: singleProject?.vercelLink || "",
         skills: singleProject?.skills || "",
-        file:  null,  // To store image file
+        file: null,  // To store image file
         description: singleProject?.description || "",
         previewUrl: null
     });
 
-    const { token } = useSelector(store => store.auth)
+    const { token, loading } = useSelector(store => store.auth)
     // console.log("Printing Token",token);
 
     // Handle input field changes
@@ -65,12 +66,12 @@ const EditProject = () => {
         }
 
         console.log([...formData.entries()]); // Debugging: Logs all form data key-value pairs
-        dispatch(updateProject(formData, token, paramsId,navigate));
+        dispatch(updateProject(formData, token, paramsId, navigate));
     };
 
     return (
-        <div className='h-full w-screen bg-white mx-auto flex justify-center items-center'>
-            <Dashboard/>
+        <div className=' w-screen bg-white mx-auto flex justify-center items-center'>
+            <Dashboard />
             <form onSubmit={handleOnSubmit} className='w-[90%] lg:w-1/2 md:w-1/2 border shadow-lg border-gray-200 rounded-md p-4 my-10 bg-white bg-opacity-80'>
                 <h1 className='font-bold text-xl mb-5 w-full text-center'>Edit Project </h1>
 
@@ -157,12 +158,19 @@ const EditProject = () => {
                     />
                 </div>
 
-                <Button type="submit" className="w-full my-4">Update Project</Button>
+                {loading ? (
+                    <Button className="w-full my-4" disabled>
+                        <Loader2 className='mr-2 h-4 animate-spin my-4' />
+                        Please wait
+                    </Button>
+                ) : (
+                    <Button type="submit" className="w-full my-4">Update</Button>
+                )}
             </form>
 
 
 
-            </div>
+        </div>
     )
 }
 

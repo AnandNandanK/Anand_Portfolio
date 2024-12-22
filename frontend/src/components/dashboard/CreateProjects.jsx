@@ -5,6 +5,7 @@ import { SlCloudUpload } from "react-icons/sl";
 import { createProject } from '../../services/operations/auth';
 import { useSelector } from "react-redux"
 import { useDispatch } from 'react-redux';
+import { Loader2 } from 'lucide-react';
 
 const CreateProjects = () => {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ const CreateProjects = () => {
         previewUrl:null
     });
 
-    const { token } = useSelector(store => store.auth)
+    const { token, loading } = useSelector(store => store.auth)
     // console.log("Printing Token",token);
 
     // Handle input field changes
@@ -156,7 +157,14 @@ const CreateProjects = () => {
                 />
             </div>
 
-            <Button type="submit" className="w-full my-4">Create Project</Button>
+            {loading ? (
+                        <Button className="w-full my-4" disabled>
+                            <Loader2 className='mr-2 h-4 animate-spin my-4' />
+                            Please wait
+                        </Button>
+                    ) : (
+                        <Button type="submit" className="w-full my-4">Create Project</Button>
+                    )}
         </form>
 
         </div>

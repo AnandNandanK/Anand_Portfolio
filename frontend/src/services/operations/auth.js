@@ -151,8 +151,10 @@ export function createProject(formData, token,projects, navigate) {
             dispatch(setProjects(updatedProjects));
 
             navigate("/dashboard/editprojects")
+            dispatch(setLoading(false));
 
         } catch (error) {
+            dispatch(setLoading(false));
             console.error("API Error:", error);
             toast.error(error?.response?.data?.message || "Something went wrong");
         } finally {
@@ -203,8 +205,10 @@ export function updateProject(formData, token , paramsId , navigate) {
 
             // dispatch(setProjects(updatedProjects));
             navigate("/dashboard/editprojects");
+            dispatch(setLoading(false));
 
         } catch (error) {
+            dispatch(setLoading(false));
             console.error("API Error:", error);
             toast.error(error?.response?.data?.message || "Something went wrong");
         } finally {
