@@ -68,7 +68,7 @@ const CreateProjects = () => {
         console.log("PROJECTS.....",projects)
 
         // console.log([...formData.entries()]); // Debugging: Logs all form data key-value pairs
-        dispatch(createProject(formData, token , projects?.data, navigate));
+        dispatch(createProject(formData, token, navigate));
     };
 
     return (

@@ -117,7 +117,7 @@ export function updateProfile(title,myself,token) {
 
 
 
-export function createProject(formData, token,projects, navigate) {
+export function createProject(formData, token,navigate) {
     return async (dispatch) => {
         // console.log([...formData.entries()], "FormData being sent");
 
@@ -147,9 +147,9 @@ export function createProject(formData, token,projects, navigate) {
             //  console.log(projects)
 
              // Append the new project to the existing list
-             const updatedProjects = [...projects, response.data.data];
+            //  const updatedProjects = [...projects, response.data.data];
 
-            dispatch(setProjects(updatedProjects));
+            // dispatch(setProjects(updatedProjects));
 
             navigate("/dashboard/editprojects")
             dispatch(setLoading(false));
