@@ -1,4 +1,5 @@
 import Hero from "../models/heroSectionModel.js";
+import User from "../models/adminModel.js"
 
 export const getHeroSection = async (req, res) => {
     try {
@@ -45,8 +46,8 @@ export const updateHeroSection = async (req, res) => {
         console.log("USER ID....",userId);
 
         const { title, myself } = req.body;
-        const avatarlocalpath = req.file?.path;
-        const avatar = await uploadOnCloudinary(avatarlocalpath);
+        // const avatarlocalpath = req.file?.path;
+        // const avatar = await uploadOnCloudinary(avatarlocalpath);
 
 
         const adminDetails= await User.findById(userId);
@@ -64,7 +65,7 @@ export const updateHeroSection = async (req, res) => {
 
         hero.title=title;
         hero.myself=myself;
-        hero.profilePhoto=avatar?.url;
+        // hero.profilePhoto=avatar?.url;
         await hero.save();
 
         const updatedHero=await User.findById(userId).populate("hero").exec();

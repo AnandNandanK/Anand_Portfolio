@@ -34,12 +34,13 @@ export default function UseGetAllProjects() {
                       }
                 }
             );
+            
 
                 if(res.data.success){
                     dispatch(setProjects(res.data))
                 }
                 
-                // console.log('HERO FETCHED SUCCESS',res.data.data);
+                console.log('HERO FETCHED SUCCESS',res.data.data);
                 
             } catch (error) {
                 console.log(error)

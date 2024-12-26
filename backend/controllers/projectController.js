@@ -199,12 +199,17 @@ export const deleteProject = async (req, res) => {
             userId,
             { $pull: { project: projectId } }, // Corrected $pull: just pass the projectId directly
             { new: true } // Return the updated user document
-        );
+        ).populate("project");
+
+        console.log("UPDATED USER.......",updatedUser)
+
 
         return res.status(200).json({
             message: "Project deleted successfully",
             success: true,
-            updatedUser // Return updated user if needed
+            data:updatedUser.project
+            
+             // Return updated user if needed
         });
 
     } catch (error) {

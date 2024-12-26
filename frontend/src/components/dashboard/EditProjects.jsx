@@ -18,12 +18,13 @@ const EditProjects = () => {
     const { projects } = useSelector((state) => state.application)
     const { theam } = useSelector((store) => store.application);
 
+    console.log('PROJECT INSIDE THE EDIT PROJECT',projects)
+
 
     // console.log("PRINTING PROJECT.....", projects)
     const { token } = useSelector(store => store.auth)
 
     const handleDelete = (id) => {
-
         // console.log(id, token)
         dispatch(deleteProject(id, token));
     }
@@ -39,12 +40,12 @@ const EditProjects = () => {
 
 
     return (
-        <div className='w-screen bg-white mx-auto '>
+        <div className='w-screen box-border bg-white mx-auto h-screen overflow-y-auto p-3 '>
             <Dashboard />
 
             <h1 className='text-3xl font-bold text-center'>Edit Projects</h1>
 
-            <div className='flex justify-center items-center mt-20 flex-wrap max-w-[1200px] mx-auto'>
+            <div className='flex justify-center items-center mt-20 flex-wrap max-w-[1200px] mx-auto '>
 
                 <div className='grid lg:grid-cols-4 gap-5 sm'>
 
@@ -75,8 +76,8 @@ const EditProjects = () => {
                                     <h1 className="font-bold text-xl sm:text-2xl">{project.title}</h1>
                                     <p className="text-sm sm:text-base">
                                         {!readMore[index]
-                                            ? project.description.slice(0, 100)
-                                            : project.description}{" "}
+                                            ? project?.description?.slice(0, 100)
+                                            : project?.description}{" "}
                                         <span
                                             className="text-blue-400 hover:cursor-pointer font-semibold"
                                             onClick={() => readMoreHandler(index)}

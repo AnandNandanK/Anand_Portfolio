@@ -5,6 +5,7 @@ import { toast } from "sonner"
 import { setUser, setLoading, setToken } from "../../redux/slice/authSlice.js"
 import { setProfile, setProjects } from "../../redux/slice/applicationSlice.js"
 import { contactAdminEndpoint } from "../apis"
+import UseGetAllProjects from "../../hooks/useGetAllProjects.jsx"
 
 const {
     LOGIN_API,
@@ -219,11 +220,12 @@ export function updateProject(formData, token , paramsId , navigate) {
 
 
 
-export function deleteProject(projectId, token,) {
-    return async (dispatch) => {
-     
-        dispatch(setLoading(true));
 
+
+
+
+export function deleteProject(projectId, token) {
+    return async (dispatch) => {
         try {
             const response = await apiConnector(
                 "POST",
@@ -234,31 +236,25 @@ export function deleteProject(projectId, token,) {
                 }
             );
 
-            // console.log(response.data, "API Response");
-
             if (!response.data.success) {
                 throw new Error(response.data.message);
             }
+            console.log(response.data)
+            dispatch(setProjects(response.data));
 
             toast.success(response.data.message);
-
-             // Get the current state of projects
-
-            //  console.log(response)
-
-             // Append the new project to the existing list
-             
-
-            dispatch(setProjects(response.data.projects));
 
         } catch (error) {
             console.error("API Error:", error);
             toast.error(error?.response?.data?.message || "Something went wrong");
-        } finally {
-            dispatch(setLoading(false));
         }
     };
 }
+
+
+
+
+
 
 
 

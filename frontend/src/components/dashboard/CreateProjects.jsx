@@ -62,10 +62,13 @@ const CreateProjects = () => {
         formData.append("skills", inputFeild.skills);
         if (inputFeild.file) {
             formData.append("file", inputFeild.file);
+
         }
 
+        console.log("PROJECTS.....",projects)
+
         // console.log([...formData.entries()]); // Debugging: Logs all form data key-value pairs
-        dispatch(createProject(formData, token , projects.data, navigate));
+        dispatch(createProject(formData, token , projects?.data, navigate));
     };
 
     return (
